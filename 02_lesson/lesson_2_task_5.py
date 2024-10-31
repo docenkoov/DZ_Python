@@ -11,6 +11,7 @@ def month_to_season(month):
     else:
         return "Некорректный месяц"
 
+
 print(month_to_season(2))  # Зима
 print(month_to_season(3))  # Весна
 print(month_to_season(6))  # Лето
