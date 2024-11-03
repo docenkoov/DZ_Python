@@ -1,0 +1,66 @@
+ Баг-репорт:
+Название: Ошибки в функции обработки строк в модуле `string_utils`
+
+Описание: В модуле `string_utils` обнаружены ошибки, возникающие при тестировании функций, связанных с
+          обработкой строк. Основные проблемы связаны с некорректной обработкой пустых строк и значений
+          `None`.
+Ожидаемое поведение:
+- Функции должны корректно обрабатывать входные данные, включая пустые строки и значения `None`.
+- Тесты должны проходить без ошибок.
+
+Фактическое поведение:
+- Тесты завершаются с ошибками, включая:
+  - `AttributeError` для вызовов методов на `NoneType`.
+  - `AssertionError` для несоответствия ожидаемого и фактического результата.
+
+Примеры ошибок:
+1. `test_capitilize_positive`
+   - Ошибка: `assert ' ' == ''`
+   - Ожидалось, что пробел будет преобразован в пустую строку, но возвращается строка с пробелом.
+
+2. `test_capitilize_negative`
+   - Ошибка: `AttributeError: 'NoneType' object has no attribute 'capitalize'`
+   - Функция `capitilize` не обрабатывает `None`.
+
+3. `test_trim_positive`
+   - Ошибка: `assert 'hello ' == 'hello'`
+   - Функция `trim` не удаляет пробелы в конце строки.
+
+4. `test_to_list_positive`
+   - Ошибка: `assert [':::'] == ':'`
+   - Функция `to_list` возвращает неправильный формат.
+
+5. `test_trim_negative`
+   - Ошибка: `AttributeError: 'NoneType' object has no attribute 'startswith'`
+   - Функция `trim` не обрабатывает `None`.
+
+6. `test_contains_negative`
+   - Ошибка: `AttributeError: 'NoneType' object has no attribute 'index'`
+   - Функция `contains` не обрабатывает `None`.
+
+7. `test_delete_symbol_negative`
+   - Ошибка: `AttributeError: 'NoneType' object has no attribute 'index'`
+   - Функция `delete_symbol` не обрабатывает `None`.
+
+8. `test_starts_with_negative`
+   - Ошибка: `AttributeError: 'NoneType' object has no attribute 'startswith'`
+   - Функция `starts_with` не обрабатывает `None`.
+
+9. `test_end_with_negative`
+   - Ошибка: `AttributeError: 'NoneType' object has no attribute 'endswith'`
+   - Функция `end_with` не обрабатывает `None`.
+
+10. `test_is_empty_negative`
+    - Ошибка: `AttributeError: 'NoneType' object has no attribute 'startswith'`
+    - Функция `is_empty` не обрабатывает `None`.
+
+11. `test_list_to_string_negative`
+    - Ошибка: `TypeError: object of type 'NoneType' has no len()`
+    - Функция `list_to_string` не обрабатывает `None`.
+
+Приоритет: Высокий (18 из 65 тестов не прошли)
+
+Дополнительная информация:
+- Версия: [Python 3.12.7; pytest 8.3.3]
+- Дата тестирования: [31.10.2024]
+- Операционная система: [Windows 10 Домашняя для одного языка]
