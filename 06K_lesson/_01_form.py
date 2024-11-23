@@ -21,7 +21,7 @@ def test_1():
         driver.find_element(
             By.CSS_SELECTOR, '[name="last-name"]').send_keys('Петров')
         driver.find_element(
-            By.CSS_SELECTOR, '.form-control[name="address"]').send_keys(
+         By.CSS_SELECTOR, '.form-control[name="address"]').send_keys(
                 'Ленина, 55-3')
         driver.find_element(
             By.CSS_SELECTOR, '.form-control[name="e-mail"]').send_keys(
